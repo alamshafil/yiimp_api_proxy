@@ -3,30 +3,13 @@ const request = require('request');
 const app = express()
 const port = 3000
 
-var baseAPI = "https://arctic-crypto.com/api/pools";
+var baseAPI = "http://arctic-crypto.com:4000/api/pools";
 var poolAPI = "http://135.125.235.154/api/";
 let options = { json: true };
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
-
-// app.get('/api/pools', (req, res) => {
-//     request(baseAPI, options, (error, result, body) => {
-//         if (error) {
-//             return console.log(error)
-//         };
-
-//         if (!error && result.statusCode == 200) {
-//             var baseJSON = JSON.parse(JSON.stringify(body));
-//             var coins = getYimp();
-//             for (var i = 0; i < coins.length; i++) {
-//                 baseJSON["pools"].push(coins[i]);
-//             }
-//             res.send(baseJSON);
-//         }
-//     });
-// })
 
 app.get('/api/pools', (req, res) => {
     request(poolAPI + "currencies", options, (error, result, body) => {
@@ -94,11 +77,19 @@ app.get('/api/pools', (req, res) => {
                 }
                 coins.push(obj);
             });
-            var baseJSON = { "pools": [] };
-            for (var i = 0; i < coins.length; i++) {
-                baseJSON["pools"].push(coins[i]);
-            }
-            res.send(baseJSON);
+            request(baseAPI, options, (error, result, body) => {
+                if (error) {
+                    return console.log(error)
+                };
+        
+                if (!error && result.statusCode == 200) {
+                    var baseJSON = JSON.parse(JSON.stringify(body));
+                    for (var i = 0; i < coins.length; i++) {
+                        baseJSON["pools"].push(coins[i]);
+                    }
+                    res.send(baseJSON);
+                }
+            });
         }
     });
 })
