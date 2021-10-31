@@ -118,6 +118,18 @@ app.get('/api/pools/:id/blocks', (req, res) => {
     });
 })
 
+app.get('/api/pools/:id/miners', (req, res) => {
+    request(baseAPI + `/${req.params.id}/miners`, options, (error, result, body) => {
+        if (error) {
+            return console.log(error)
+        };
+
+        if (!error && result.statusCode == 200) {
+            res.send(body);
+        }
+    });
+})
+
 app.get('/api/pools/:id/payments', (req, res) => {
     request(baseAPI + `/${req.params.id}/payments`, options, (error, result, body) => {
         if (error) {
