@@ -4,12 +4,29 @@ const app = express()
 const port = 3000
 
 var baseAPI = "https://arctic-crypto.com/api/pools";
-var poolAPI = "https://minersmine.com/api/";
+var poolAPI = "http://135.125.235.154/api/";
 let options = { json: true };
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+// app.get('/api/pools', (req, res) => {
+//     request(baseAPI, options, (error, result, body) => {
+//         if (error) {
+//             return console.log(error)
+//         };
+
+//         if (!error && result.statusCode == 200) {
+//             var baseJSON = JSON.parse(JSON.stringify(body));
+//             var coins = getYimp();
+//             for (var i = 0; i < coins.length; i++) {
+//                 baseJSON["pools"].push(coins[i]);
+//             }
+//             res.send(baseJSON);
+//         }
+//     });
+// })
 
 app.get('/api/pools', (req, res) => {
     request(poolAPI + "currencies", options, (error, result, body) => {
@@ -25,10 +42,10 @@ app.get('/api/pools', (req, res) => {
                 var obj = {
                     "id": e.name,
                     "coin": {
-                        "type": key,
+                        "type": e.symbol,
                         "name": e.name,
-                        "symbol": key,
-                        "family": key,
+                        "symbol": e.symbol,
+                        "family": e.symbol,
                         "algorithm": e.algo,
                         "canonicalName": null
                     },
@@ -52,7 +69,7 @@ app.get('/api/pools', (req, res) => {
                     "clientConnectionTimeout": 600,
                     "jobRebroadcastTimeout": 10,
                     "blockRefreshInterval": 400,
-                    "poolFeePercent": 1.0,
+                    "poolFeePercent": e.fees,
                     "address": "NULL",
                     "addressInfoLink": "NULL",
                     "poolStats": {
