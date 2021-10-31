@@ -42,10 +42,10 @@ app.get('/api/pools', (req, res) => {
                 var obj = {
                     "id": e.name,
                     "coin": {
-                        "type": e.symbol,
+                        "type": key,
                         "name": e.name,
-                        "symbol": e.symbol,
-                        "family": e.symbol,
+                        "symbol": key,
+                        "family": key,
                         "algorithm": e.algo,
                         "canonicalName": null
                     },
