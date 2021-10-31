@@ -95,7 +95,7 @@ app.get('/api/pools', (req, res) => {
 })
 
 app.get('/api/pools/:id/performance', (req, res) => {
-    request(baseAPI + `pools/${req.params.id}/performance`, options, (error, result, body) => {
+    request(baseAPI + `/${req.params.id}/performance`, options, (error, result, body) => {
         if (error) {
             return console.log(error)
         };
@@ -107,7 +107,7 @@ app.get('/api/pools/:id/performance', (req, res) => {
 })
 
 app.get('/api/pools/:id/blocks', (req, res) => {
-    request(baseAPI + `pools/${req.params.id}/blocks`, options, (error, result, body) => {
+    request(baseAPI + `/${req.params.id}/blocks`, options, (error, result, body) => {
         if (error) {
             return console.log(error)
         };
@@ -119,7 +119,7 @@ app.get('/api/pools/:id/blocks', (req, res) => {
 })
 
 app.get('/api/pools/:id/payments', (req, res) => {
-    request(baseAPI + `pools/${req.params.id}/payments`, options, (error, result, body) => {
+    request(baseAPI + `/${req.params.id}/payments`, options, (error, result, body) => {
         if (error) {
             return console.log(error)
         };
@@ -131,7 +131,7 @@ app.get('/api/pools/:id/payments', (req, res) => {
 })
 
 app.get('/api/pools/:id/miners/:addr', (req, res) => {
-    request(baseAPI + `pools/${req.params.id}/miners/${req.params.addr}`, options, (error, result, body) => {
+    request(baseAPI + `/${req.params.id}/miners/${req.params.addr}`, options, (error, result, body) => {
         if (error) {
             return console.log(error)
         };
@@ -143,7 +143,7 @@ app.get('/api/pools/:id/miners/:addr', (req, res) => {
 })
 
 app.get('/api/pools/:id/miners/:addr/settings', (req, res) => {
-    request(baseAPI + `pools/${req.params.id}/miners/${req.params.addr}/settings`, options, (error, result, body) => {
+    request(baseAPI + `/${req.params.id}/miners/${req.params.addr}/settings`, options, (error, result, body) => {
         if (error) {
             return console.log(error)
         };
@@ -155,7 +155,7 @@ app.get('/api/pools/:id/miners/:addr/settings', (req, res) => {
 })
 
 app.get('/api/pools/:id/miners/:addr/performance', (req, res) => {
-    request(baseAPI + `pools/${req.params.id}/miners/${req.params.addr}/performance`, options, (error, result, body) => {
+    request(baseAPI + `/${req.params.id}/miners/${req.params.addr}/performance`, options, (error, result, body) => {
         if (error) {
             return console.log(error)
         };
