@@ -40,7 +40,7 @@ app.get('/api/pools', (req, res) => {
             Object.keys(api).forEach(function (key) {
                 var e = api[key];
                 var obj = {
-                    "id": e.name,
+                    "id": key,
                     "coin": {
                         "type": key,
                         "name": e.name,
